@@ -1,0 +1,90 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* universal */
+body {
+  padding-top: 60px;
+}
+section {
+  overflow: auto;
+}
+textarea {
+  resize: vertical;
+}
+.center {
+  text-align: center;
+}
+.center h1 {
+  margin-bottom: 10px;
+}
+.navbar{
+  background-color: #EF163D;
+  border-color: #EF163D;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  &:hover{
+    color: #47363B;
+  }
+}
+.btn{
+  background-color: #EF163D;
+  border-color: #EF163D;
+  text-transform: uppercase;
+  font-weight: bold;
+  &:hover{
+    background-color: #EF163D;
+    border-color: #EF163D;
+    color: #47363B;
+  }
+}
+
+/* typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  /*文字文字の間が狭まる*/
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: #777;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* header */
+#logo{
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
