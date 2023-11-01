@@ -1,0 +1,8 @@
+= link_to '新規作成', new_micropost_path
+
+- @microposts.each do |micropost|
+  .post= micropost.content
+
+
+-#
+-# rails g scaffold comment content:text
