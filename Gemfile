@@ -17,6 +17,7 @@ gem 'haml-rails'
 gem "pg"
 
 group :development, :test do
+  gem 'sgcop', github: 'SonicGarden/sgcop'
   gem "debug",   "1.7.1", platforms: %i[ mri mingw x64_mingw ]
 end
 
