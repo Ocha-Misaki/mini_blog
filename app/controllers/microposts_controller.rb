@@ -12,6 +12,18 @@ class MicropostsController < ApplicationController
     @micropost = Micropost.find(params[:id])
   end
 
+  def edit
+    @micropost = Micropost.find(params[:id])
+  end
+  def update
+    @micropost = Micropost.find(params[:id])
+    if @micropost.update(micropost_params)
+      redirect_to root_path
+    else
+      render 'edit'
+    end
+  end
+
   def create
     @micropost = Micropost.new(micropost_params)
     if @micropost.save
@@ -19,6 +31,12 @@ class MicropostsController < ApplicationController
     end
   end
 
+  def destory
+    Micropost.find(params[:id]).destory
+    redirect_to root_path
+  end
+
+private
 
   def micropost_params
     params.require(:micropost).permit(:content)

@@ -1,1 +1,4 @@
 = - @micropost.content
+
+= link_to '編集' , edit_micropost_path(@micropost)
+= link_to '削除' , micropost_path(micropost), method: :delete
