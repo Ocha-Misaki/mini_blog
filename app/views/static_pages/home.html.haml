@@ -1,5 +1,0 @@
-.row
-  %section.micopost_form
-    = form_with(model: @micropost) do |f|
-      = f.text_area :content, placeholder: "Compose new micropost…"
-      = f.submit "Post", class: "btn btn-primary"

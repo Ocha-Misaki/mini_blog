@@ -1,7 +1,8 @@
 class MicropostsController < ApplicationController
+  before_action :get_micropost, only:[:show,:edit,:update,:destroy]
 
   def index
-    @microposts = Micropost.order(id: asc)
+    @microposts = Micropost.order(id: :asc)
   end
 
   def new
@@ -9,16 +10,15 @@ class MicropostsController < ApplicationController
   end
 
   def show
-    @micropost = Micropost.find(params[:id])
+
   end
 
   def edit
-    @micropost = Micropost.find(params[:id])
   end
+
   def update
-    @micropost = Micropost.find(params[:id])
     if @micropost.update(micropost_params)
-      redirect_to root_path
+      redirect_to root_path, notice: '変更しました'
     else
       render 'edit'
     end
@@ -32,12 +32,16 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
-    @micropost = Micropost.find(params[:id])
     @micropost.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: '削除しました'
   end
 
+
 private
+
+  def get_micropost
+    @micropost = Micropost.find(params[:id])
+  end
 
   def micropost_params
     params.require(:micropost).permit(:content)
