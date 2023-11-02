@@ -1,7 +1,7 @@
 class MicropostsController < ApplicationController
 
   def index
-    @microposts = Micropost.all
+    @microposts = Micropost.order(id: asc)
   end
 
   def new
