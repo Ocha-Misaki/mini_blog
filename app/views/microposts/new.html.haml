@@ -1,0 +1,9 @@
+.row
+  %section.micopost_form
+    = form_with(model: @micropost) do |f|
+      %ul
+        - @micropost.errors.each do |error|
+          %li
+            = error.full_message
+      = f.text_area :content, placeholder: "文章を投稿してください"
+      = f.submit "Post", class: "btn btn-primary"
