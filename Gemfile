@@ -7,6 +7,7 @@ gem 'rails', '7.0.4.3'
 
 gem 'bootsnap'
 gem 'bootstrap-sass'
+gem 'devise'
 gem 'haml-rails'
 gem 'importmap-rails'
 gem 'pg'
