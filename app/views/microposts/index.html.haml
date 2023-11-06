@@ -1,5 +1,6 @@
 - if user_signed_in?
   = link_to '新規作成', new_micropost_path
+  %h2投稿一覧
   - @microposts.each do |micropost|
     .post= micropost.content
     = link_to '詳細', micropost_path(micropost)

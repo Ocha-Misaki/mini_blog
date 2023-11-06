@@ -1,0 +1,8 @@
+- if @user == current_user
+   %h1 プロフィール
+   .name= @user.name
+   .profile= @user.profile
+- else
+   %h1 ユーザー詳細
+   .name= @user.name
+   .profile= @user.profile
