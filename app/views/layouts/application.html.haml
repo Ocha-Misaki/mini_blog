@@ -9,6 +9,17 @@
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
   %body
-    = render 'layouts/header'
+    %header.navbar.navbar-fixed-top.navbar-inverse
+      %div.container
+        =link_to 'mini blog', root_path, id: "logo"
+        - if user_signed_in?
+          %ul.nav.navbar-nav.navbar-right
+            %li= link_to 'ユーザー一覧', '#'
+            %li= link_to 'プロフィール', '#'
+            %li= button_to 'ログアウト', destroy_user_session_path, method: :delete
+        - else
+          %ul.nav.navbar-nav.navbar-right
+            %li= link_to '新規作成', new_user_registration_path
+            %li= link_to 'ログイン', new_user_session_path
     .container
       = yield
