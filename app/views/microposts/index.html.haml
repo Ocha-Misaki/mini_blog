@@ -1,5 +1,9 @@
-= link_to '新規作成', new_micropost_path
-
-- @microposts.each do |micropost|
-  .post= micropost.content
-  = link_to '詳細', micropost_path(micropost)
+- if user_signed_in?
+  = link_to '新規作成', new_micropost_path
+  %h2 全体タイムライン
+  - @microposts.each do |micropost|
+    .post= micropost.content
+    .posted_at= l micropost.created_at
+    = link_to '詳細', micropost_path(micropost)
+- else
+  %h2 ミニブログへようこそ
