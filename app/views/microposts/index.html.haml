@@ -3,6 +3,7 @@
   %h2投稿一覧
   - @microposts.each do |micropost|
     .post= micropost.content
+    .posted_at= l micropost.created_at
     = link_to '詳細', micropost_path(micropost)
 - else
   %h2 ようこそ

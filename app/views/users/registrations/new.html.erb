@@ -8,6 +8,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
     <%= f.label :profile %><br />
     <%= f.text_field :profile, autofocus: true, autocomplete: "profile"%>
   </div>

@@ -22,7 +22,8 @@ class MicropostsController < ApplicationController
   end
 
   def create
-    @micropost = Micropost.new(micropost_params)
+    @current_user = current_user
+    @micropost = @current_user.microposts.build(micropost_params)
     if @micropost.save
       redirect_to root_path, notice: '投稿しました'
     else
@@ -31,7 +32,7 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
-    @micropost.destroy
+    @micropost.destroy!
     redirect_to root_path, notice: '削除しました'
   end
 
