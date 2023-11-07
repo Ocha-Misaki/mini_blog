@@ -1,4 +1,3 @@
 %h1 ユーザー一覧
 - @users.each do |user|
-  .name= user.name
-  = link_to 'ユーザー詳細', user_path(user)
+  .name= link_to user.name, user_path(user)

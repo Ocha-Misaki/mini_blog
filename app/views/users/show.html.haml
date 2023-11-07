@@ -1,10 +1,9 @@
-
 %h1 プロフィール
 .name= @user.name
 .profile= @user.profile
 - @user.microposts.each do |micropost|
-   .content= micropost.content
+ .content= micropost.content
 
 - if @user == current_user
-   =link_to '編集', edit_user_registration_path
-=link_to '戻る', users_path
+ =link_to '編集', edit_user_registration_path
+ =link_to '戻る', users_path
