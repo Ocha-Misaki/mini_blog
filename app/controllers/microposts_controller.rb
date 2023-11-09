@@ -22,8 +22,7 @@ class MicropostsController < ApplicationController
   end
 
   def create
-    @current_user = current_user
-    @micropost = @current_user.microposts.build(micropost_params)
+    @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       redirect_to root_path, notice: '投稿しました'
     else
