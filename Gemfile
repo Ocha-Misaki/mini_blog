@@ -21,6 +21,7 @@ group :development, :test do
   gem 'debug', '1.7.1', platforms: %i[mri mingw x64_mingw]
   gem 'haml_lint', require: false
   gem 'sgcop', github: 'SonicGarden/sgcop'
+  gem 'rspec-rails'
 end
 
 group :development do
