@@ -1,5 +1,6 @@
 = @micropost.content
 .posted_at= l @micropost.created_at
+.creater= '投稿者 : ' + @micropost.user.name
 
 = link_to '編集', edit_micropost_path(@micropost)
 = button_to '削除', micropost_path(@micropost), method: :delete
