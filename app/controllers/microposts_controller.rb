@@ -2,7 +2,7 @@ class MicropostsController < ApplicationController
   before_action :set_micropost, only: %i[show edit update destroy]
 
   def index
-    @microposts = Micropost.order(updated_at: :desc)
+    @feed_items = current_user.feed.order(updated_at: :desc)
   end
 
   def new
