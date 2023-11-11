@@ -4,6 +4,11 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   root 'microposts#index'
-  resources :users, only: %i[index show]
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :microposts
+  resources :relationships, only: %i[create destroy]
 end
