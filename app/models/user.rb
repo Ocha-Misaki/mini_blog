@@ -13,7 +13,6 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
-  # ユーザーのステータスフィードを返す
   def feed
     following_ids = "SELECT followed_id FROM relationships
                     WHERE  follower_id = :user_id"
@@ -21,12 +20,10 @@ class User < ApplicationRecord
                     OR user_id = :user_id", user_id: id)
   end
 
-  #ユーザーをフォローする
   def follow(other_user)
     following << other_user unless self == other_user
   end
 
-  # ユーザーをフォロー解除する
   def unfollow(other_user)
     following.delete(other_user)
   end

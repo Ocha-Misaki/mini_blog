@@ -3,8 +3,7 @@ class MicropostsController < ApplicationController
   before_action :user_signed_in?, only: %i[index new show edit update create destroy]
 
   def index
-    @microposts = Micropost.paginate(page: params[:page])
-    # @feed_items = current_user.feed.order(updated_at: :desc)
+    @feed_items = current_user.feed.paginate(page: params[:page])
   end
 
   def new

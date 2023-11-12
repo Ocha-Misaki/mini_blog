@@ -1,0 +1,7 @@
+.row
+  .col-md-8
+    %h2= @title
+    - if @users.any?
+      %ul.users.follow
+        = render @users
+      = will_paginate
