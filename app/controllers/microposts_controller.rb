@@ -1,5 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :set_micropost, only: %i[show edit update destroy]
+  before_action :user_signed_in?, only: %i[index new show edit update create destroy]
 
   def index
     @feed_items = current_user.feed.order(updated_at: :desc)
