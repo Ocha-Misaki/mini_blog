@@ -4,7 +4,7 @@ describe '一覧表示機能' do
     user = FactoryBot.create(:user)
     FactoryBot.create(:micropost, content: 'テスト投稿', user: user)
   end
-  context 'ユーザーAがログインしているとき' do
+  context 'ユーザーがログインしているとき' do
     before do
       # ユーザーAでログイン
       # ログイン画面に遷移
