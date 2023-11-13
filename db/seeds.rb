@@ -9,10 +9,10 @@ User.create!(name: "Example User",
   email = "example-#{n+1}@railstutorial.org"
   profile = Faker::ProgrammingLanguage.name
   password = "password"
-  User.create!(name:  name,
-               email: email,
-               profile: profile,
-               password: password,
+  User.create!(name:,
+               email:,
+               profile:,
+               password:,
                password_confirmation: password)
 end
 

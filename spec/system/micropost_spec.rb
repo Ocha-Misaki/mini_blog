@@ -1,8 +1,8 @@
 require 'rails_helper'
 describe '一覧表示機能' do
   before do
-    user_a = FactoryBot.create(:user)
-    FactoryBot.create(:micropost, content: 'テスト投稿', user: user_a)
+    user = FactoryBot.create(:user)
+    FactoryBot.create(:micropost, content: 'テスト投稿', user: user)
   end
   context 'ユーザーAがログインしているとき' do
     before do
