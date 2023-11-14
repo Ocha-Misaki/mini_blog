@@ -1,6 +1,6 @@
 class Users::MicropostsController < ApplicationController
-  before_action :set_micropost, only: %i[show edit update destroy]
   before_action :authenticate_user!
+  before_action :set_micropost, only: %i[show edit update destroy]
 
   def new
     @micropost = current_user.microposts.new

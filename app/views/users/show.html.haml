@@ -5,14 +5,10 @@
       =render 'follow_form' if user_signed_in?
       .name= @user.name
       .profile= @user.profile
-      - if @user == current_user
-        =link_to '編集', edit_user_registration_path
-        =link_to '戻る', users_path
     %section.stats
-      = render 'shared/stats'
+      = render 'shared/stats', user: @user
   .col-md-8
     - if @user.microposts.any?
       %h2 投稿
       %ol.microposts
         = render @user.microposts
-        
