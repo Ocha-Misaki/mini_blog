@@ -3,7 +3,7 @@ class Users::MicropostsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @micropost = Micropost.new
+    @micropost = current_user.microposts.new
   end
 
   def show; end
@@ -35,7 +35,7 @@ class Users::MicropostsController < ApplicationController
   private
 
   def set_micropost
-    @micropost = Micropost.find(params[:id])
+    @micropost = current_user.microposts.find(params[:id])
   end
 
   def micropost_params
