@@ -3,8 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  VALID_NAME_REGEX = /\A[a-z]+\z/
-  validates :name, presence: true, length: { maximum: 20 }, format: { with: VALID_NAME_REGEX }
+  validates :name, presence: true, length: { maximum: 20 }
   validates :profile, presence: true, length: { maximum: 200 }
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id',
@@ -14,7 +13,6 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
-  # ユーザーのステータスフィードを返す
   def feed
     following_ids = "SELECT followed_id FROM relationships
                     WHERE  follower_id = :user_id"
@@ -22,12 +20,10 @@ class User < ApplicationRecord
                     OR user_id = :user_id", user_id: id)
   end
 
-  #ユーザーをフォローする
   def follow(other_user)
     following << other_user unless self == other_user
   end
 
-  # ユーザーをフォロー解除する
   def unfollow(other_user)
     following.delete(other_user)
   end
