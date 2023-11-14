@@ -2,7 +2,7 @@ class MicropostsController < ApplicationController
   before_action :set_micropost, only: %i[show edit update destroy]
 
   def index
-    @microposts = Micropost.order(updated_at: :desc)
+    @feed_items = current_user.feed.order(updated_at: :desc)
   end
 
   def new
@@ -22,8 +22,7 @@ class MicropostsController < ApplicationController
   end
 
   def create
-    @current_user = current_user
-    @micropost = @current_user.microposts.build(micropost_params)
+    @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       redirect_to root_path, notice: '投稿しました'
     else

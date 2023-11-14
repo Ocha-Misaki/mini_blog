@@ -21,10 +21,14 @@ group :development, :test do
   gem 'debug', '1.7.1', platforms: %i[mri mingw x64_mingw]
   gem 'haml_lint', require: false
   gem 'sgcop', github: 'SonicGarden/sgcop'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails', '~> 4.11'
+  gem 'faker'
+
 end
 
 group :development do
-  gem 'faker'
+
   gem 'gimei'
   gem 'rails-i18n'
   gem 'solargraph', '0.48.0'
@@ -34,9 +38,9 @@ end
 group :test do
   gem 'capybara',                 '3.38.0'
   gem 'guard',                    '2.18.0'
-  gem 'guard-minitest',           '2.4.6'
-  gem 'minitest',                 '5.18.0'
-  gem 'minitest-reporters',       '1.6.0'
+
+  gem 'capybara-screenshot'
+
   gem 'rails-controller-testing', '1.0.5'
   gem 'selenium-webdriver',       '4.8.3'
   gem 'webdrivers',               '5.2.0'
