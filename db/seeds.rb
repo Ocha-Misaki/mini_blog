@@ -5,7 +5,7 @@ User.create!(name: "Example User",
             password_confirmation: "foobar" )
 
 10.times do |n|
-  name  = Faker::Name.name
+  name  = Faker::ProgrammingLanguage.name
   email = "example-#{n+1}@railstutorial.org"
   profile = Faker::ProgrammingLanguage.name
   password = "password"

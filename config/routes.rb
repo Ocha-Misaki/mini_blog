@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
 
   resource :user do
-    resource :micropost
+    resources :microposts, only: %i[new show create edit update destroy], module: :users
   end
 
   resources :microposts, only: :index

@@ -1,6 +1,10 @@
 class Users::MicropostsController < ApplicationController
-  before_action :set_micropost, only: %i[show edit update destroy]
   before_action :authenticate_user!
+  before_action :set_micropost, only: %i[show edit update destroy]
+
+  def index
+    @feed_items = current_user.feed.paginate(page: params[:page])
+  end
 
   def new
     @micropost = Micropost.new
@@ -35,7 +39,7 @@ class Users::MicropostsController < ApplicationController
   private
 
   def set_micropost
-    @micropost = Micropost.find(params[:id])
+    @micropost = current_user.microposts.find(params[:id])
   end
 
   def micropost_params

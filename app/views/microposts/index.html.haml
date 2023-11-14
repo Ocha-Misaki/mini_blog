@@ -1,5 +1,5 @@
 - if user_signed_in?
-  = link_to '新規作成', new_micropost_path
+  = link_to '新規作成', new_user_microposts_path
   %h2 全体タイムライン
   = render 'shared/feed', feed_items: @feed_items
 - else
