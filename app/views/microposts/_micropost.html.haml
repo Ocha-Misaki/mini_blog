@@ -1,6 +1,6 @@
 %li
   %span.user
-    = link_to micropost.user.name, micropost.user
+    = link_to micropost.user.name, user_path(micropost.user)
   %span.content
     = micropost.content
   %span.timestamp
