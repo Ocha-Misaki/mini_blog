@@ -1,9 +1,0 @@
-= @micropost.content
-.posted_at= l @micropost.created_at
-.creater= link_to @micropost.user.name, user_path(@micropost.user)
-
-= link_to '編集', edit_micropost_path(@micropost)
-= button_to '削除', micropost_path(@micropost), method: :delete
-
-
-#このファイルはもういらないかも
