@@ -3,7 +3,7 @@ class Users::MicropostsController < ApplicationController
   before_action :set_micropost, only: %i[show edit update destroy]
 
   def index
-    @feed_items = current_user.feed.paginate(page: params[:page])
+    @feed_items = current_user.feed.order(created_at: :desc).paginate(page: params[:page])
   end
 
   def new
