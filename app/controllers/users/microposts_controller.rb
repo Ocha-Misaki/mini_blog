@@ -2,6 +2,10 @@ class Users::MicropostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_micropost, only: %i[show edit update destroy]
 
+  def index
+    @feed_items = current_user.feed.paginate(page: params[:page])
+  end
+
   def new
     @micropost = current_user.microposts.new
   end
@@ -29,7 +33,7 @@ class Users::MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy!
-    redirect_to root_path, notice: '削除しました'
+    redirect_to root_path, notice: '削除しました', status: :see_other
   end
 
   private

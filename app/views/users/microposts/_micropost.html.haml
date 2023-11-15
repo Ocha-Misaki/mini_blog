@@ -1,8 +1,12 @@
 %li
   %span.user
-    = link_to current_user.name, user_path(current_user)
+  ##以下の実装わかりにくい
+  - if current_user == micropost.user
+    = link_to current_user.name, user_profile_path
+  - else
+    = link_to micropost.user.name, user_path(micropost.user)
   %span.content
-    = micropost.content
+  = micropost.content
   %span.timestamp
     = time_ago_in_words(micropost.created_at) + '前'
 

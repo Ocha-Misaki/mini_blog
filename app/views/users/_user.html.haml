@@ -1,2 +1,6 @@
 %ul.users
-%li.name= link_to user.name, user_path(user)
+## 以下の実装わかりにくい
+- if current_user == user
+  %li.name= link_to user.name, user_profile_path
+- else
+  %li.name= link_to user.name, user_path(user)

@@ -1,6 +1,0 @@
-- if user_signed_in?
-  = link_to '新規作成', new_user_micropost_path
-  %h2 全体タイムライン
-  = render 'shared/feed', feed_items: @feed_items
-- else
-  %h2 ミニブログへようこそ

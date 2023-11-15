@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'microposts#index'
+  root 'users/microposts#index'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations'
@@ -11,10 +11,9 @@ Rails.application.routes.draw do
   end
 
   resource :user do
-    resources :microposts, only: %i[new create edit update destroy], module: :users
-    resources :profiles, only: %i[show edit update], module: :users
+    resources :microposts, only: %i[index new create edit update destroy], module: :users
+    resource :profile, only: %i[show edit update], module: :users
   end
 
-  resources :microposts, only: :index
   resources :relationships, only: %i[create destroy]
 end
