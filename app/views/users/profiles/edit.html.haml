@@ -1,7 +1,6 @@
 %h2
   Edit
-= sinple_form_for current_user, url: user_profile_path) do |f|
-  = render "users/shared/error_messages", resource: @user
+= form_with(model: current_user, url: user_profile_path) do |f|
   .field
     = f.label :name
     %br/
@@ -13,5 +12,4 @@
   .actions
     = f.submit "Update"
 %div
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete}
 = link_to "Back", :back

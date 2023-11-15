@@ -5,7 +5,7 @@
       .name= current_user.name
       .profile= current_user.profile
       =link_to '編集', edit_user_profile_path
-      =link_to '戻る', user_profile_path
+      =link_to '戻る', users_path
     %section.stats
       = render 'shared/stats', user: current_user
   .col-md-8
