@@ -1,6 +1,5 @@
 %li
   %span.user
-  ##以下の実装わかりにくい
   - if current_user == micropost.user
     = link_to current_user.name, user_profile_path
   - else
