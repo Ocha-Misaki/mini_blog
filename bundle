@@ -1,0 +1,22 @@
+
+An error occurred while loading ./spec/system/micropost_spec.rb.
+Failure/Error:
+  Rspec.describe 'ユーザー' do
+    before do
+      let(user) { FactoryBot.create(:user, profile: 'テスト') }
+    end
+  
+    context 'ログインしているとき' do
+      before do
+        sign_in user
+      end
+  
+
+NameError:
+  uninitialized constant Rspec
+# ./spec/system/micropost_spec.rb:2:in `<main>'
+
+
+Finished in 0.00006 seconds (files took 3.02 seconds to load)
+0 examples, 0 failures, 1 error occurred outside of examples
+
