@@ -1,0 +1,15 @@
+%h2
+  Edit
+= form_with(model: current_user, url: user_profile_path) do |f|
+  .field
+    = f.label :name
+    %br/
+    = f.text_field :name, autofocus: true, autocomplete: "name"
+  .field
+    = f.label :profile
+    %br/
+    = f.text_field :profile, autofocus: true, autocomplete: "profile"
+  .actions
+    = f.submit "Update"
+%div
+= link_to "Back", :back

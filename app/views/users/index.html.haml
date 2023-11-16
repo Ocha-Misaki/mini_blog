@@ -1,3 +1,4 @@
 %h1 ユーザー一覧
-- @users.each do |user|
-  .name= link_to user.name, user_path(user)
+= will_paginate
+= render @users
+= will_paginate

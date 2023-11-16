@@ -71,3 +71,50 @@ p {
   padding-top: 9px;
   font-weight: bold;
 }
+
+/* microposts */
+.micropost-list {
+  list-style: none;
+  padding: 0;
+  li{
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .user{
+    margin-top: 5em;
+    padding-top: 0;
+  }
+  .content{
+    display: block;
+    margin-left: 60px;
+  }
+  .timestamp{
+    color: $gray-light;
+    display: block;
+    margin-left: 60px;
+  }
+}
+
+/* sidebar */
+.stats {
+  overflow: auto;
+  margin-top: 0;
+  padding: 0;
+  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $gray-lighter;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: blue;
+    }
+  }
+  strong {
+    display: block;
+  }
+}

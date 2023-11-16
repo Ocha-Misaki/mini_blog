@@ -1,12 +1,13 @@
-class MicropostsController < ApplicationController
+class Users::MicropostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_micropost, only: %i[show edit update destroy]
 
   def index
-    @feed_items = current_user.feed.order(updated_at: :desc)
+    @feed_items = current_user.feed.order(created_at: :desc).paginate(page: params[:page])
   end
 
   def new
-    @micropost = Micropost.new
+    @micropost = current_user.microposts.new
   end
 
   def show; end
@@ -32,13 +33,13 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy!
-    redirect_to root_path, notice: '削除しました'
+    redirect_to root_path, notice: '削除しました', status: :see_other
   end
 
   private
 
   def set_micropost
-    @micropost = Micropost.find(params[:id])
+    @micropost = current_user.microposts.find(params[:id])
   end
 
   def micropost_params

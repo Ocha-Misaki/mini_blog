@@ -1,0 +1,17 @@
+%h1 プロフィール
+.row
+  %aside.col-md-4
+    %section.user-info
+      .name= current_user.name
+      .profile= current_user.profile
+      =link_to '編集', edit_user_profile_path
+      =link_to '戻る', users_path
+    %section.stats
+      = render 'shared/stats', user: current_user
+  .col-md-8
+    %h2 投稿
+    - if current_user.microposts.any?
+      %ol.micropost-list
+        = render current_user.microposts
+    - else
+      まだ投稿はありません
