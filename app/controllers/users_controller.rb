@@ -1,14 +1,12 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: %i[following followers]
+  before_action :set_user, only: %i[show following followers]
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.order(created_at: :desc).paginate(page: params[:page])
   end
 
-  def show
-    @user = User.find(params[:id])
-  end
+  def show; end
 
   def following
     @title = "Following"

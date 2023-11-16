@@ -1,23 +1,31 @@
 require 'rails_helper'
-describe '一覧表示機能' do
+Rspec.describe 'ユーザー' do
   before do
-    user = FactoryBot.create(:user)
-    FactoryBot.create(:micropost, content: 'テスト投稿', user: user)
+    let(user) { FactoryBot.create(:user, profile: 'そろそろ眠いです') }
   end
-  context 'ユーザーがログインしているとき' do
+
+  context 'ログインしているとき' do
     before do
-      # ログイン画面に遷移
-      visit new_user_session_path
-      # 名前を入力
-      fill_in 'Name', with: 'test'
-      # パスワードを入力
-      fill_in 'パスワード', with: 'password'
-      # ログインボタンを押す
-      click_button 'Log in'
+      sign_in user
     end
-    it 'ユーザーが作成した投稿が表示される' do
+
+    it 'プロフィールリンクが表示される' do
+      # サインイン状態
       visit root_path
-      expect(page).to have_content 'テスト投稿'
+      expect(page).to have_content 'プロフィール'
+    end
+
+    it 'プロフィールが閲覧できる' do
+      visit user_profile_path
+      expect(page).to have_content 'そろそろ眠いです'
+    end
+
+    it '投稿の新規作成ができる' do
+      visit new_user_micropost_path
+      fill_in '内容', with: 'おやすみなさい'
+      click_on '投稿する'
+      expect(page).to have_content '投稿されました'
+      expect(page).to have_content 'おやすみなさい'
     end
   end
 end

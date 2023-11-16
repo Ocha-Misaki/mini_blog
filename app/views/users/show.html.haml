@@ -2,7 +2,7 @@
 .row
   %aside.col-md-4
     %section.user-info
-      =render 'follow_form' if user_signed_in?
+      =render 'follow_form', user: @user if user_signed_in?
       .name= @user.name
       .profile= @user.profile
     %section.stats

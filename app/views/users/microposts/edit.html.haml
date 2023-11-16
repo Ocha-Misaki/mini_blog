@@ -1,6 +1,6 @@
 .row
   %section.micopost_form
-    = form_with(model: [:user,@micropost]) do |f|
+    = form_with(model: [:user, @micropost]) do |f|
       = f.text_area :content
       = f.submit "update", class: "btn btn-primary"
 
