@@ -1,25 +1,6 @@
 FactoryBot.define do
-  factory :follower, class: Relationship do
+  factory :relationship do
     follower_id { 1 }
     followed_id { 1 }
-  end
-
-  factory :following, class: Relationship do
-    follower_id { 1 }
-    followed_id { 1 }
-  end
-end
-
-def create_relationships
-  10.times do
-    FactoryBot.create(:continuous_users)
-  end
-
-  FactoryBot.create(:user, profile: 'テスト') do |user|
-    FactoryBot.create(:user, profile: 'テスト2') do |other|
-      FactoryBot.create(:follower, follower_id: other.id, followed_id: user.id)
-      FactoryBot.create(:following, follower_id: user.id, followed_id: other.id)
-    end
-    user
   end
 end

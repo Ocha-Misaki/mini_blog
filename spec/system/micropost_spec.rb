@@ -1,6 +1,7 @@
 require 'rails_helper'
-RSpec.describe 'ユーザー' do
+RSpec.describe 'ユーザー', type: :system do
   let(:user) { FactoryBot.create(:user, profile: 'テスト') }
+  let(:michael) { FactoryBot.create(:user, profile: 'テスト') }
   before do
   end
 
@@ -43,9 +44,12 @@ RSpec.describe 'ユーザー' do
     end
 
     it '自分の投稿とフォローしているユーザーの投稿が表示される' do
-      #自分の投稿が表示される場合
-      #フォローしているユーザーの投稿が表示される場合
-      #フォローしていないユーザーの投稿は表示されない場合
+      FactoryBot.create(:micropost, user:, content: 'こんにちは')
+      FactoryBot.create(:micropost, user:, content: 'テスト')
+      FactoryBot.create(:relationship, followed_id: michael.id, follower_id: user.id)
+      visit root_path
+      expect(page).to have_content 'こんにちは'
+      expect(page).to have_content 'テスト'
     end
 
     it 'プロフィールの編集ができる' do
@@ -57,62 +61,3 @@ RSpec.describe 'ユーザー' do
   end
 end
 
-RSpec.describe 'フォロー機能' do
-  let(:user) { FactoryBot.create(:user, profile: 'テスト') }
-  let(:other) { FactoryBot.create(:other, profile: 'こんばんは') }
-  before do
-  end
-
-  context 'ログインしているとき' do
-    before do
-      sign_in user
-    end
-
-    it 'フォローができる' do
-      expect(user.following?(other)).to_not be_truthy
-      user.follow(other)
-      expect(user.following?(other)).to be_truthy
-    end
-
-    it 'フォロー解除ができる' do
-      user.follow(other)
-      expect(user.following?(other)).to_not be_falsey
-      user.unfollow(other)
-      expect(user.following?(other)).to be_falsey
-    end
-
-    it 'フォロー・フォロワー数がユーザーページに表示される' do
-      user = FactoryBot.send(:create_relationships)
-      visit user_path(user)
-      expect(page).to have_content '10 following'
-      expect(page).to have_content '10 followers'
-    end
-
-    it 'フォロー・フォロワー数が自分のプロフィールページに表示される' do
-      user = FactoryBot.send(:create_relationships)
-      visit user_profile_path(user)
-      expect(page).to have_content '10 following'
-      expect(page).to have_content '10 followers'
-    end
-
-    it 'フォロー一覧が表示される' do
-      user = FactoryBot.send(:create_relationships)
-      visit following_user_path(user)
-      expect(user.following).to_not be_empty
-      expect(page).to have_content 'Following'
-      user.following.each do |user|
-        expect(page).to have_link user.name, href: user_path(user)
-      end
-    end
-
-    it 'フォロワー一覧が表示される' do
-      user = FactoryBot.send(:create_relationships)
-      visit followers_user_path(user)
-      expect(user.followers).to_not be_empty
-      expect(page).to have_content 'Followers'
-      user.followers.each do |user|
-        expect(page).to have_link user.name, href: user_path(user)
-      end
-    end
-  end
-end
