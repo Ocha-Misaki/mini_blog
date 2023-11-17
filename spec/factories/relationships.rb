@@ -16,7 +16,7 @@ def create_relationships
   end
 
   FactoryBot.create(:user, profile: 'テスト') do |user|
-    User.all[0...-1].each do |other|
+    FactoryBot.create(:user, profile: 'テスト2') do |other|
       FactoryBot.create(:follower, follower_id: other.id, followed_id: user.id)
       FactoryBot.create(:following, follower_id: user.id, followed_id: other.id)
     end
