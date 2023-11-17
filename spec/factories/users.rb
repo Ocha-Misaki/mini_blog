@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
-    name { 'user' }
+    name { 'usera' }
     profile { 'テスト' }
     email { 'usera@example.com' }
     password { 'passworda' }
@@ -8,8 +8,8 @@ FactoryBot.define do
   end
 
   factory :continuous_users, class: User do
-    name { 'aaa' }
-    sequence(:email) { |n| "user-#{n}@example.com" }
+    sequence(:name) { |n| "user#{n}" }
+    sequence(:email) { |n| "user#{n}@example.com" }
     profile { 'Hello' }
     password { 'password' }
     password_confirmation { 'password' }
