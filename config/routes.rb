@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   end
 
   resource :user do
-    resources :microposts, only: %i[index new create edit update destroy], module: :users
+    resources :microposts, only: %i[index new create edit update destroy], module: :users do
+      resources :likes, only: %i[create destory], module: :microposts
+    end
     resource :profile, only: %i[show edit update], module: :users
     resources :relationships, only: %i[create destroy], module: :users
   end
