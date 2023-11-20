@@ -1,0 +1,8 @@
+- if Like.exists?(user_id: current_user.id, micropost_id: micropost.id)
+  = link_to user_micropost_like_path(micropost.id), method: :delete do
+    %span.glyphicon.glyphicon-heart
+    = micropost.likes.count
+- else
+  = link_to user_micropost_likes_path(params: {micropost_id: micropost.id}), data: { "turbo-method": :post } do
+    %span.glyphicon.glyphicon-heart-empty
+    = micropost.likes.count

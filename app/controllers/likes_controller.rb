@@ -1,7 +1,6 @@
 class Microposts::LikesController < ApplicationController
   before_action :authenticate_user!
   def create
-    ##　投稿詳細ページを作成する
     @micropost = Micropost.find(params[:id])
     if @micropost.user != current_user
       @likes = Like.build(user_id: current_user.id,
