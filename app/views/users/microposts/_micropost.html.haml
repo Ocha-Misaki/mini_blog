@@ -13,3 +13,6 @@
   %span.detail
     = link_to '編集', edit_user_micropost_path(micropost)
     = button_to '削除', user_micropost_path(micropost), method: :delete
+- else
+  %span.detail
+    = link_to '詳細', micropost_path(micropost)
