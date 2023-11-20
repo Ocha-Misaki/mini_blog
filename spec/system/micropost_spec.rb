@@ -1,7 +1,8 @@
 require 'rails_helper'
-Rspec.describe 'ユーザー' do
+RSpec.describe 'ユーザー', type: :system do
+  let(:user) { FactoryBot.create(:user, profile: 'テスト') }
+  let(:michael) { FactoryBot.create(:user, profile: 'テスト') }
   before do
-    let(user) { FactoryBot.create(:user, profile: 'そろそろ眠いです') }
   end
 
   context 'ログインしているとき' do
@@ -17,15 +18,46 @@ Rspec.describe 'ユーザー' do
 
     it 'プロフィールが閲覧できる' do
       visit user_profile_path
-      expect(page).to have_content 'そろそろ眠いです'
+      expect(page).to have_content 'テスト'
     end
 
     it '投稿の新規作成ができる' do
       visit new_user_micropost_path
-      fill_in '内容', with: 'おやすみなさい'
-      click_on '投稿する'
-      expect(page).to have_content '投稿されました'
+      fill_in 'Content', with: 'おやすみなさい'
+      click_on 'Post'
       expect(page).to have_content 'おやすみなさい'
+    end
+
+    it '投稿の編集ができる' do
+      micropost = FactoryBot.create(:micropost, user:, content: 'テスト')
+      visit edit_user_micropost_path(micropost)
+      fill_in 'Content', with: 'おはようございます'
+      click_on 'update'
+      expect(page).to have_content 'おはようございます'
+    end
+
+    it '投稿の削除ができる' do
+      FactoryBot.create(:micropost, user:, content: 'テスト')
+      visit root_path
+      click_on '削除'
+      expect(current_path).to eq root_path
+    end
+
+    it '自分の投稿とフォローしているユーザーの投稿が表示される' do
+      FactoryBot.create(:micropost, user:, content: 'こんにちは')
+      FactoryBot.create(:micropost, user:, content: 'テスト')
+      FactoryBot.create(:relationship, followed_id: michael.id, follower_id: user.id)
+      visit root_path
+      expect(page).to have_content 'こんにちは'
+      expect(page).to have_content 'テスト'
+    end
+
+    it 'プロフィールの編集ができる' do
+      visit edit_user_profile_path(user)
+      fill_in 'Profile', with: '今日は寒い'
+      click_on 'Update'
+      expect(page).to have_content '今日は寒い'
     end
   end
 end
+

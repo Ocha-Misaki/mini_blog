@@ -15,9 +15,13 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
 
   def feed
-    Micropost.where("user_id IN (#{following_ids.join(',')})
-                    OR user_id = :user_id", user_id: id)
-             .includes(:user)
+    if following_ids.present?
+      Micropost.where("user_id IN (#{following_ids.join(',')})
+                      OR user_id = :user_id", user_id: id)
+              .includes(:user)
+    else
+      microposts
+    end
   end
 
   def follow(other_user)
