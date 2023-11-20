@@ -13,7 +13,7 @@ RSpec.describe 'いいね機能', type: :system do
     end
 
     it 'ユーザーの投稿にいいねボタンが表示される' do
-      visit user_path(michael)
+      visit micropost_path(michael_micropost)
       expect(page).to have_content '🩷'
     end
 
