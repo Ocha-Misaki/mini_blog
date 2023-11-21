@@ -15,7 +15,7 @@ class Users::Microposts::LikesController < ApplicationController
 
   private
   def set_micropost
-   @micropost = Micropost.find(params[:micropost_id])
+    @micropost = Micropost.find(params[:micropost_id])
   end
 
   def correct_micropost
