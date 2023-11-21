@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe 'いいね機能', type: :system do
   let(:user) { FactoryBot.create(:user, profile: 'テスト') }
   let(:michael) { FactoryBot.create(:user, name: 'michael', profile: 'こんばんは') }
-  let(:user_micropost) { FactoryBot.create(:micropost, :user, content: 'こんにちは') }
+  let(:user_micropost) { FactoryBot.create(:micropost, user:, content: 'こんにちは') }
   let(:michael_micropost) {FactoryBot.create(:micropost, user: michael, content: 'お腹すいた') }
   before do
   end
@@ -37,7 +37,7 @@ RSpec.describe 'いいね機能', type: :system do
 
     it 'いいね数が自分の投稿に表示される' do
       michael.likes.create!(micropost_id: user_micropost.id)
-      visit user_micropost_path
+      visit user_micropost_path(user_micropost)
       expect(page).to have_content '1'
     end
 
@@ -48,18 +48,19 @@ RSpec.describe 'いいね機能', type: :system do
     end
 
     it 'プロフィールページにいいねした投稿が表示される' do
-      user.likes(michael_micropost)
+      user.likes.create!(micropost_id: michael_micropost.id)
       visit user_profile_path
-      expect(page).to have_content 'いいねした一覧'
+      expect(page).to have_content 'いいねした投稿'
       expect(page).to have_content 'お腹すいた'
       expect(page).to have_link 'michael', href: user_path(michael)
     end
 
     it 'ユーザーページにいいねした投稿が表示される' do
-      michael.like(user_micropost)
-      expect(page).to have_content 'いいねした一覧'
+      michael.likes.create!(micropost_id: user_micropost.id)
+      visit user_path(michael)
+      expect(page).to have_content 'いいねした投稿'
       expect(page).to have_content 'こんにちは'
-      expect(page).to have_link 'user', href: user_profile_path
+      expect(page).to have_link 'user', href: user_path(user)
     end
   end
 end
