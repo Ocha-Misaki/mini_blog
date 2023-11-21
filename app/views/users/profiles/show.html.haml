@@ -10,8 +10,7 @@
       = render 'shared/stats', user: current_user
     - if current_user.likes.any?
       %section.likes
-        ##以下エラー発生
-        = render 'shared/likes', like: current_user.likes
+        = render 'shared/likes', likes: current_user.likes
   .col-md-8
     %h2 投稿
     - if current_user.microposts.any?

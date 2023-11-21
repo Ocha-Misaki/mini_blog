@@ -9,7 +9,7 @@
       = render 'shared/stats', user: @user
     - if @user.likes.any?
       %section.likes
-        = render 'shared/likes', like: @user.likes.find_by(user_id: @user.id)
+        = render 'shared/likes', likes: @user.likes
   .col-md-8
     - if @user.microposts.any?
       %h2 投稿
