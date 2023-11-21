@@ -2,8 +2,6 @@ require 'rails_helper'
 RSpec.describe 'ユーザー', type: :system do
   let(:user) { FactoryBot.create(:user, profile: 'テスト') }
   let(:michael) { FactoryBot.create(:user, profile: 'テスト') }
-  before do
-  end
 
   context 'ログインしているとき' do
     before do
@@ -40,7 +38,7 @@ RSpec.describe 'ユーザー', type: :system do
       FactoryBot.create(:micropost, user:, content: 'テスト')
       visit root_path
       click_on '削除'
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path root_path, ignore_query: true
     end
 
     it '自分の投稿とフォローしているユーザーの投稿が表示される' do
@@ -60,4 +58,3 @@ RSpec.describe 'ユーザー', type: :system do
     end
   end
 end
-

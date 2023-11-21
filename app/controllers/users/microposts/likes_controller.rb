@@ -14,13 +14,14 @@ class Users::Microposts::LikesController < ApplicationController
   end
 
   private
+
   def set_micropost
     @micropost = Micropost.find(params[:micropost_id])
   end
 
   def correct_micropost
-    if @micropost.user == current_user
-      redirect_to micropost_path(@micropost)
-    end
+    return unless @micropost.user == current_user
+
+    redirect_to micropost_path(@micropost)
   end
 end

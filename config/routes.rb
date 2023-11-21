@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'users/microposts#index'
   devise_for :users, controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
   }
   resources :users, only: %i[index show] do
     member do
