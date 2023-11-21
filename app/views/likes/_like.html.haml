@@ -1,8 +1,9 @@
-- if Like.exists?(user_id: current_user.id, micropost_id: micropost.id)
-  = link_to user_micropost_like_path(micropost.id), method: :delete do
+- like = current_user.likes.find_by(micropost_id: micropost.id)
+- if like.present?
+  = button_to user_micropost_like_path(micropost, like), method: :delete , "data-testid": "likes_btn" do
     %span.glyphicon.glyphicon-heart
     = micropost.likes.count
 - else
-  = link_to user_micropost_likes_path(params: {micropost_id: micropost.id}), data: { "turbo-method": :post } do
+  = button_to user_micropost_likes_path(micropost) , "data-testid": "likes_btn" do
     %span.glyphicon.glyphicon-heart-empty
     = micropost.likes.count
