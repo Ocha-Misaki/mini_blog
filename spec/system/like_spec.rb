@@ -3,7 +3,7 @@ RSpec.describe 'いいね機能', type: :system do
   let(:user) { FactoryBot.create(:user, profile: 'テスト') }
   let(:michael) { FactoryBot.create(:user, name: 'michael', profile: 'こんばんは') }
   let(:user_micropost) { FactoryBot.create(:micropost, user:, content: 'こんにちは') }
-  let(:michael_micropost) {FactoryBot.create(:micropost, user: michael, content: 'お腹すいた') }
+  let(:michael_micropost) { FactoryBot.create(:micropost, user: michael, content: 'お腹すいた') }
   before do
   end
 
@@ -24,14 +24,14 @@ RSpec.describe 'いいね機能', type: :system do
 
     it 'いいねができる' do
       visit micropost_path(michael_micropost)
-      expect{find('[data-testid="likes_btn"]').click}.to change{Like.count}.from(0).to(1)
+      expect { find('[data-testid="likes_btn"]').click }.to change { Like.count }.from(0).to(1)
       expect(current_path).to eq micropost_path(michael_micropost)
     end
 
     it 'いいね解除ができる' do
       user.likes.create!(micropost_id: michael_micropost.id)
       visit micropost_path(michael_micropost)
-      expect{find('[data-testid="likes_btn"]').click}.to change{Like.count}.from(1).to(0)
+      expect { find('[data-testid="likes_btn"]').click }.to change { Like.count }.from(1).to(0)
       expect(current_path).to eq micropost_path(michael_micropost)
     end
 
