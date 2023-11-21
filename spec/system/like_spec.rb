@@ -14,36 +14,37 @@ RSpec.describe 'いいね機能', type: :system do
 
     it 'ユーザーの投稿にいいねボタンが表示される' do
       visit micropost_path(michael_micropost)
-      expect(page).to have_content '🩷'
+      expect(page).to have_css('[data-testid="likes_btn"]')
     end
 
     it '自分の投稿にはいいねボタンが表示されない' do
       visit user_profile_path
-      expect(page).not_to have_content '🩷'
+      expect(page).not_to have_css('[data-testid="likes_btn"]')
     end
 
     it 'いいねができる' do
-      visit user_path(michael)
-      click_on '🤍'
-      expect(current_path).to eq user_path(michael)
+      visit micropost_path(michael_micropost)
+      expect{find('[data-testid="likes_btn"]').click}.to change{Like.count}.from(0).to(1)
+      expect(current_path).to eq micropost_path(michael_micropost)
     end
 
     it 'いいね解除ができる' do
-      visit user_path(michael)
-      click_on '🩷'
-      expect(current_path).to eq user_path(michael)
+      user.likes.create!(micropost_id: michael_micropost.id)
+      visit micropost_path(michael_micropost)
+      expect{find('[data-testid="likes_btn"]').click}.to change{Like.count}.from(1).to(0)
+      expect(current_path).to eq micropost_path(michael_micropost)
     end
 
     it 'いいね数が自分の投稿に表示される' do
-      michael.like(user_micropost)
-      visit user_profile_path
-      expect(page).to have_content '🩷| 1'
+      michael.likes.create!(micropost_id: user_micropost.id)
+      visit user_micropost_path
+      expect(page).to have_content '1'
     end
 
     it 'いいね数がユーザー投稿に表示される' do
-      user.like(michael_micropost)
-      visit user_path(michael)
-      expect(page).to have_content '🩷| 1'
+      user.likes.create!(micropost_id: michael_micropost.id)
+      visit micropost_path(michael_micropost)
+      expect(page).to have_content '1'
     end
 
     it 'プロフィールページにいいねした投稿が表示される' do
