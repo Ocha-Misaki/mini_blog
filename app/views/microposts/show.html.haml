@@ -7,4 +7,4 @@
   %li.timestamp
     = time_ago_in_words(@micropost.created_at) + '前'
 .heart-btn
-  = render 'likes/like', micropost: @micropost
+  = render 'likes/like', micropost: @micropost, like: @like

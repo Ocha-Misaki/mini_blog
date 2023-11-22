@@ -8,7 +8,7 @@ class Users::Microposts::LikesController < ApplicationController
   end
 
   def destroy
-    like = current_user.likes.find(params[:id])
+    like = current_user.likes.find_by(micropost_id: @micropost.id)
     like.destroy!
     redirect_to micropost_path(@micropost), notice: 'いいね削除しました'
   end

@@ -33,8 +33,7 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
-  def like?(micropost)
-    like = likes.find_by(micropost:)
-    like.presence
+  def like?
+    likes.present?
   end
 end
