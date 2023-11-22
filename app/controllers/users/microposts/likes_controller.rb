@@ -3,7 +3,7 @@ class Users::Microposts::LikesController < ApplicationController
   before_action :set_micropost
   before_action :correct_micropost
   def create
-    current_user.likes.create!(micropost_id: @micropost.id)
+    current_user.likes.create!(micropost: @micropost)
     redirect_to micropost_path(@micropost), notice: 'いいねしました'
   end
 
