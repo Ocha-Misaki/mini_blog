@@ -7,9 +7,8 @@
       .profile= @user.profile
     %section.stats
       = render 'shared/stats', user: @user
-    - if @user.likes.any?
-      %section.likes
-        = render 'shared/likes', likes: @user.likes
+    %section.likes
+      = render 'shared/likes', likes: @user.likes
   .col-md-8
     - if @user.microposts.any?
       %h2 投稿
