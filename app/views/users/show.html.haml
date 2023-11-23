@@ -13,4 +13,4 @@
     - if @user.microposts.any?
       %h2 投稿
       %ol.micropost-list
-        = render @user.microposts
+        = render @user.microposts.order(created_at: :desc)
