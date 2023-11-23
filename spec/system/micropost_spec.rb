@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'ユーザー', type: :system do
-  let(:user) { FactoryBot.create(:user, profile: 'テスト') }
-  let(:michael) { FactoryBot.create(:user, profile: 'テスト') }
+  let(:user) { FactoryBot.create(:user, profile: 'そろそろ眠いです') }
+  let(:michael) { FactoryBot.create(:user, profile: '早起きが得意です') }
 
   context 'ログインしているとき' do
     before do
