@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'いいね機能', type: :system do
-  let(:user) { FactoryBot.create(:user, profile: 'テスト') }
-  let(:michael) { FactoryBot.create(:user, name: 'michael', profile: 'こんばんは') }
+  let(:user) { FactoryBot.create(:user, profile: 'そろそろ眠いです') }
+  let(:michael) { FactoryBot.create(:user, name: 'michael', profile: '早起きが得意です') }
   let(:user_micropost) { FactoryBot.create(:micropost, user:, content: 'こんにちは') }
   let(:michael_micropost) { FactoryBot.create(:micropost, user: michael, content: 'お腹すいた') }
 

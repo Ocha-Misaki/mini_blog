@@ -1,7 +1,8 @@
 require 'rails_helper'
 RSpec.describe 'フォロー機能', type: :system do
-  let(:user) { FactoryBot.create(:user, profile: 'テスト') }
-  let(:michael) { FactoryBot.create(:user, name: 'michael', profile: 'こんばんは') }
+  let(:user) { FactoryBot.create(:user, profile: 'そろそろ眠いです') }
+  let(:michael) { FactoryBot.create(:user, name: 'michael', profile: '早起きが得意です', created_at: Time.zone.now) }
+  let(:tom) { FactoryBot.create(:user, name: 'tom', profile: 'お腹が空きました', created_at: 1.day.from_now) }
 
   context 'フォローしていないユーザーのページを開いたとき' do
     before do
@@ -19,7 +20,9 @@ RSpec.describe 'フォロー機能', type: :system do
     before do
       sign_in user
       user.follow(michael)
+      user.follow(tom)
       michael.follow(user)
+      tom.follow(user)
       visit user_path(michael)
     end
 
@@ -44,6 +47,8 @@ RSpec.describe 'フォロー機能', type: :system do
       expect(user.following).not_to be_empty
       expect(page).to have_content 'Following'
       expect(page).to have_link 'michael', href: user_path(michael)
+      expect(page).to have_link 'tom', href: user_path(tom)
+      expect(page.text).to match(/#{michael.name}[\n]*#{tom.name}/)
     end
 
     it 'フォロワー一覧が表示される' do
@@ -51,6 +56,8 @@ RSpec.describe 'フォロー機能', type: :system do
       expect(user.followers).not_to be_empty
       expect(page).to have_content 'Followers'
       expect(page).to have_link 'michael', href: user_path(michael)
+      expect(page).to have_link 'tom', href: user_path(tom)
+      expect(page.text).to match(/#{michael.name}[\n]*#{tom.name}/)
     end
   end
 end

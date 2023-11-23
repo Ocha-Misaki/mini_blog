@@ -16,7 +16,7 @@ RSpec.describe 'ユーザー', type: :system do
 
     it 'プロフィールが閲覧できる' do
       visit user_profile_path
-      expect(page).to have_content 'テスト'
+      expect(page).to have_content 'そろそろ眠いです'
     end
 
     it '投稿の新規作成ができる' do
@@ -42,15 +42,18 @@ RSpec.describe 'ユーザー', type: :system do
     end
 
     it '自分の投稿とフォローしているユーザーの投稿が表示される' do
-      FactoryBot.create(:micropost, user:, content: 'こんにちは')
-      FactoryBot.create(:micropost, user:, content: 'テスト')
-      FactoryBot.create(:relationship, followed_id: michael.id, follower_id: user.id)
+      FactoryBot.create(:micropost, user:, content: 'こんにちは', created_at: Time.zone.now)
+      FactoryBot.create(:micropost, user: michael, content: 'こんばんは', created_at: 1.week.ago)
+      user.follow(michael)
       visit root_path
       expect(page).to have_content 'こんにちは'
-      expect(page).to have_content 'テスト'
+      expect(page).to have_content 'こんばんは'
+      expect(page.text).to match(/#{'こんばんは'}[\s\S]*#{'こんにちは'}/)
     end
 
     it 'プロフィールの編集ができる' do
+      visit user_profile_path(user)
+      expect(page).to have_content 'そろそろ眠いです'
       visit edit_user_profile_path(user)
       fill_in 'Profile', with: '今日は寒い'
       click_on 'Update'
