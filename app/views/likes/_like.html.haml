@@ -1,4 +1,4 @@
-- if current_user.like?
+- if like
   = button_to user_micropost_like_path(micropost, like), method: :delete , "data-testid": "likes_btn" do
     %span.glyphicon.glyphicon-heart
     = micropost.likes.count
