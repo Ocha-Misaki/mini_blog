@@ -8,13 +8,7 @@
       =link_to '戻る', users_path
     %section.stats
       = render 'shared/stats', user: current_user
-    - if current_user.likes.any?
-      %section.likes
-        = render 'shared/likes', likes: current_user.likes
+    %section.likes
+      = render 'shared/likes', likes: current_user.likes
   .col-md-8
-    %h2 投稿
-    - if current_user.microposts.any?
-      %ol.micropost-list
-        = render current_user.microposts.order(created_at: :desc)
-    - else
-      まだ投稿はありません
+    = render 'shared/micropost-list', user: current_user
