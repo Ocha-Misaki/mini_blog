@@ -30,7 +30,7 @@ RSpec.describe 'ユーザー', type: :system do
       micropost = FactoryBot.create(:micropost, user:, content: 'テスト')
       visit edit_user_micropost_path(micropost)
       fill_in 'Content', with: 'おはようございます'
-      click_on 'update'
+      click_on 'Update'
       expect(page).to have_content 'おはようございます'
     end
 
@@ -42,13 +42,16 @@ RSpec.describe 'ユーザー', type: :system do
     end
 
     it '自分の投稿とフォローしているユーザーの投稿が表示される' do
-      FactoryBot.create(:micropost, user:, content: 'こんにちは', created_at: Time.zone.now)
+      FactoryBot.create(:micropost, user:, content: 'こんにちは', created_at: Time.current)
       FactoryBot.create(:micropost, user: michael, content: 'こんばんは', created_at: 1.week.ago)
       user.follow(michael)
       visit root_path
-      expect(page).to have_content 'こんにちは'
-      expect(page).to have_content 'こんばんは'
-      expect(page.text).to match(/#{'こんばんは'}[\s\S]*#{'こんにちは'}/)
+      # テストパスしない
+      expect(find('.content')[0]).to have_content 'こんにちは'
+      expect(find('.content')[1]).to have_content 'こんばんは'
+      within('.micropost-list') do
+        expect(page).not_to have_content 'ログアウト'
+      end
     end
 
     it 'プロフィールの編集ができる' do

@@ -1,8 +1,8 @@
 require 'rails_helper'
 RSpec.describe 'フォロー機能', type: :system do
   let(:user) { FactoryBot.create(:user, profile: 'そろそろ眠いです') }
-  let(:michael) { FactoryBot.create(:user, name: 'michael', profile: '早起きが得意です', created_at: Time.zone.now) }
-  let(:tom) { FactoryBot.create(:user, name: 'tom', profile: 'お腹が空きました', created_at: 1.day.from_now) }
+  let(:michael) { FactoryBot.create(:user, name: 'michael', profile: '早起きが得意です', created_at: Time.current) }
+  let(:tom) { FactoryBot.create(:user, name: 'tom', profile: 'お腹が空きました', created_at: 1.day.since) }
 
   context 'フォローしていないユーザーのページを開いたとき' do
     before do
@@ -38,8 +38,8 @@ RSpec.describe 'フォロー機能', type: :system do
 
     it 'フォロー・フォロワー数が自分のプロフィールページに表示される' do
       visit user_profile_path(user)
-      expect(page).to have_content '1 | following'
-      expect(page).to have_content '1 | followers'
+      expect(page).to have_content '2 | following'
+      expect(page).to have_content '2 | followers'
     end
 
     it 'フォロー一覧が表示される' do

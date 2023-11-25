@@ -27,7 +27,7 @@ RSpec.describe 'いいね機能', type: :system do
     end
 
     it 'いいね解除ができる' do
-      user.likes.create!(micropost_id: michael_micropost.id)
+      user.likes.create!(micropost: michael_micropost)
       visit micropost_path(michael_micropost)
       expect { find('[data-testid="likes_btn"]').click }.to change { Like.count }.from(1).to(0)
       expect(page).to have_current_path micropost_path(michael_micropost), ignore_query: true
