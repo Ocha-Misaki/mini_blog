@@ -3,6 +3,6 @@
     = form_with(model: [:user, @micropost]) do |f|
       = f.label :content
       = f.text_area :content
-      = f.submit "update", class: "btn btn-primary"
+      = f.submit "Update", class: "btn btn-primary"
 
   = link_to '戻る', user_profile_path
