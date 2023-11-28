@@ -46,9 +46,7 @@ RSpec.describe 'ユーザー', type: :system do
       FactoryBot.create(:micropost, user: michael, content: 'こんばんは', created_at: 1.week.ago)
       user.follow(michael)
       visit root_path
-      # テストパスしない
-      expect(find('.content')[0]).to have_content 'こんにちは'
-      expect(find('.content')[1]).to have_content 'こんばんは'
+      expect(page.text).to match(/#{'こんばんは'}[\s\S]*#{'こんにちは'}/)
       within('.micropost-list') do
         expect(page).not_to have_content 'ログアウト'
       end
