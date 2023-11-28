@@ -120,6 +120,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    dockerfile-rails (1.5.12)
+      rails (>= 3.0.0)
     e2mmap (0.1.0)
     erubi (1.12.0)
     execjs (2.9.1)
@@ -207,6 +209,8 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.15.4-aarch64-linux)
+      racc (~> 1.4)
     nokogiri (1.15.4-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
@@ -346,6 +350,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sentry-rails (5.13.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.13.0)
+    sentry-ruby (5.13.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     shellany (0.0.1)
     solargraph (0.48.0)
       backport (~> 1.2)
@@ -408,6 +417,7 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
+  aarch64-linux
   arm64-darwin-23
   x86_64-linux
 
@@ -418,6 +428,7 @@ DEPENDENCIES
   capybara-screenshot
   debug (= 1.7.1)
   devise
+  dockerfile-rails (>= 1.5)
   factory_bot_rails (~> 4.11)
   faker
   gimei
@@ -433,6 +444,8 @@ DEPENDENCIES
   rspec-rails
   sassc-rails
   selenium-webdriver (= 4.8.3)
+  sentry-rails (~> 5.13)
+  sentry-ruby (~> 5.13)
   sgcop!
   solargraph (= 0.48.0)
   sprockets-rails
