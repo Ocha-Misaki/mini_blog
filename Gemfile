@@ -21,16 +21,14 @@ gem 'will_paginate-bootstrap-style'
 
 group :development, :test do
   gem 'debug', '1.7.1', platforms: %i[mri mingw x64_mingw]
-  gem 'haml_lint', require: false
-  gem 'sgcop', github: 'SonicGarden/sgcop'
-  gem 'rspec-rails'
   gem 'factory_bot_rails', '~> 4.11'
   gem 'faker'
-
+  gem 'haml_lint', require: false
+  gem 'rspec-rails'
+  gem 'sgcop', github: 'SonicGarden/sgcop'
 end
 
 group :development do
-
   gem 'gimei'
   gem 'rails-i18n'
   gem 'solargraph', '0.48.0'
