@@ -1,9 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'ユーザー', type: :system do
-  let(:user) { FactoryBot.create(:user, profile: 'テスト') }
-  let(:michael) { FactoryBot.create(:user, profile: 'テスト') }
-  before do
-  end
+  let(:user) { FactoryBot.create(:user, profile: 'そろそろ眠いです') }
+  let(:michael) { FactoryBot.create(:user, profile: '早起きが得意です') }
 
   context 'ログインしているとき' do
     before do
@@ -18,7 +16,7 @@ RSpec.describe 'ユーザー', type: :system do
 
     it 'プロフィールが閲覧できる' do
       visit user_profile_path
-      expect(page).to have_content 'テスト'
+      expect(page).to have_content 'そろそろ眠いです'
     end
 
     it '投稿の新規作成ができる' do
@@ -32,7 +30,7 @@ RSpec.describe 'ユーザー', type: :system do
       micropost = FactoryBot.create(:micropost, user:, content: 'テスト')
       visit edit_user_micropost_path(micropost)
       fill_in 'Content', with: 'おはようございます'
-      click_on 'update'
+      click_on 'Update'
       expect(page).to have_content 'おはようございます'
     end
 
@@ -40,19 +38,25 @@ RSpec.describe 'ユーザー', type: :system do
       FactoryBot.create(:micropost, user:, content: 'テスト')
       visit root_path
       click_on '削除'
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path root_path, ignore_query: true
     end
 
     it '自分の投稿とフォローしているユーザーの投稿が表示される' do
-      FactoryBot.create(:micropost, user:, content: 'こんにちは')
-      FactoryBot.create(:micropost, user:, content: 'テスト')
-      FactoryBot.create(:relationship, followed_id: michael.id, follower_id: user.id)
+      FactoryBot.create(:micropost, user:, content: 'こんにちは', created_at: Time.current)
+      FactoryBot.create(:micropost, user: michael, content: 'こんばんは', created_at: 1.week.ago)
+      user.follow(michael)
       visit root_path
-      expect(page).to have_content 'こんにちは'
-      expect(page).to have_content 'テスト'
+      # テストパスしない
+      expect(find('.content')[0]).to have_content 'こんにちは'
+      expect(find('.content')[1]).to have_content 'こんばんは'
+      within('.micropost-list') do
+        expect(page).not_to have_content 'ログアウト'
+      end
     end
 
     it 'プロフィールの編集ができる' do
+      visit user_profile_path(user)
+      expect(page).to have_content 'そろそろ眠いです'
       visit edit_user_profile_path(user)
       fill_in 'Profile', with: '今日は寒い'
       click_on 'Update'
@@ -60,4 +64,3 @@ RSpec.describe 'ユーザー', type: :system do
     end
   end
 end
-

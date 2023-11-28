@@ -10,7 +10,9 @@ class Users::MicropostsController < ApplicationController
     @micropost = current_user.microposts.new
   end
 
-  def show; end
+  def show
+    @like = current_user.likes.find_by(micropost_id: @micropost.id)
+  end
 
   def edit; end
 

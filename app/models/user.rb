@@ -7,21 +7,17 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 20 }, format: { with: VALID_NAME_REGEX }
   validates :profile, presence: true, length: { maximum: 200 }
   has_many :microposts, dependent: :destroy
-  has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id',
+  has_many :active_relationships, class_name: 'Relationship', inverse_of: :follower, foreign_key: 'follower_id',
                                   dependent: :destroy
-  has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id',
+  has_many :passive_relationships, class_name: 'Relationship', inverse_of: :followed, foreign_key: 'followed_id',
                                    dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  has_many :likes, dependent: :destroy
+
   def feed
-    if following_ids.present?
-      Micropost.where("user_id IN (#{following_ids.join(',')})
-                      OR user_id = :user_id", user_id: id)
-              .includes(:user)
-    else
-      microposts
-    end
+    Micropost.where(user_id: following_ids << id).includes(:user).order(updated_at: :desc)
   end
 
   def follow(other_user)
