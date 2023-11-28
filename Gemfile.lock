@@ -120,6 +120,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    dockerfile-rails (1.5.12)
+      rails (>= 3.0.0)
     e2mmap (0.1.0)
     erubi (1.12.0)
     execjs (2.9.1)
@@ -418,6 +420,7 @@ DEPENDENCIES
   capybara-screenshot
   debug (= 1.7.1)
   devise
+  dockerfile-rails (>= 1.5)
   factory_bot_rails (~> 4.11)
   faker
   gimei
