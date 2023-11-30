@@ -1,0 +1,44 @@
+name: Ruby
+
+on:
+  pull_request:
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+
+    env:
+      RUBYOPT: -EUTF-8
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Rspec
+        run: bundle exec rspec
+
+      - uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      - name: Run reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git fetch --no-tags
+          reviewdog -reporter=github-pr-review -runners=undercover
+
+      - uses: aki77/delete-pr-comments-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          bodyContains: "[undercover]"
+      - name: Run reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git fetch
+          reviewdog -reporter=github-pr-review -runners=undercover

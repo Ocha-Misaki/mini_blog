@@ -120,6 +120,7 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    docile (1.4.0)
     e2mmap (0.1.0)
     erubi (1.12.0)
     execjs (2.9.1)
@@ -162,6 +163,8 @@ GEM
       sysexits (~> 1.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    imagen (0.1.8)
+      parser (>= 2.5, != 2.5.1.1)
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -336,6 +339,7 @@ GEM
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
+    rugged (1.6.3)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -349,6 +353,13 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     shellany (0.0.1)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov-lcov (0.8.0)
+    simplecov_json_formatter (0.1.4)
     solargraph (0.48.0)
       backport (~> 1.2)
       benchmark
@@ -385,6 +396,13 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    undercover (0.4.6)
+      imagen (>= 0.1.8)
+      rainbow (>= 2.1, < 4.0)
+      rugged (>= 0.27, < 1.7)
+    undercover-checkstyle (0.3.0)
+      rexml
+      undercover (>= 0.3.4)
     unicode-display_width (2.5.0)
     warden (1.2.9)
       rack (>= 2.0.9)
@@ -437,10 +455,14 @@ DEPENDENCIES
   sassc-rails
   selenium-webdriver (= 4.8.3)
   sgcop!
+  simplecov
+  simplecov-lcov
   solargraph (= 0.48.0)
   sprockets-rails
   stimulus-rails
   turbo-rails
+  undercover
+  undercover-checkstyle
   web-console (= 4.2.0)
   webdrivers (= 5.2.0)
   will_paginate

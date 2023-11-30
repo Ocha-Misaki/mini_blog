@@ -40,10 +40,13 @@ group :test do
   gem 'guard',                    '2.18.0'
 
   gem 'capybara-screenshot'
-
   gem 'rails-controller-testing', '1.0.5'
   gem 'selenium-webdriver',       '4.8.3'
-  gem 'webdrivers',               '5.2.0'
+  gem 'simplecov', require: false
+  gem 'simplecov-lcov'
+  gem 'undercover'
+  gem 'undercover-checkstyle'
+  gem 'webdrivers', '5.2.0'
 end
 
 # Windows ではタイムゾーン情報用の tzinfo-data gem を含める必要があります
